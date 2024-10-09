@@ -20,9 +20,9 @@ export const Header = () => {
         className="self-center whitespace-nowrap text-sm sm:text-xl dark:text-white"
         aria-label="Elise's Recipes - Home"
       >
-        <span className="px-2 py-1 bg-gradient-to-r from-pink-600 to-orange-400 rounded-lg text-white shadow-md">
+        <p className="px-2 py-1 text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-400">
           Elise's Recipes
-        </span>
+        </p>
       </Link>
       <form aria-label="Search recipes">
         <TextInput
