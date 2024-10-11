@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "react-query";
-import { formatRegisterData } from "./formatters";
-import { registerUser } from "./services";
-import { Type_register } from "./types";
+import { formatLoginData, formatRegisterData } from "./formatters";
+import { login, registerUser } from "./services";
+import { Type_login, Type_register } from "./types";
 import toast from "react-hot-toast";
 
 export const useMutationRegistereUser = () => {
@@ -16,6 +16,14 @@ export const useMutationRegistereUser = () => {
     onError: (err: any) => {
       toast.error("Something went wrong");
       return err;
+    },
+  });
+};
+
+export const useMutationLogin = () => {
+  return useMutation({
+    mutationFn: (credentials: Type_login) => {
+      return login(formatLoginData(credentials));
     },
   });
 };

@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import { Controller, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Type_register } from "../../api/auth/types";
 import { useMutationRegistereUser } from "../../api/auth";
@@ -42,13 +42,16 @@ export const RegisterForm = () => {
     resolver: yupResolver<Type_register>(Schema_register),
   });
 
-  const { mutateAsync, isLoading, isSuccess } =
-    useMutationRegistereUser() || {};
+  const {
+    mutateAsync: mutateRegister,
+    isLoading,
+    isSuccess,
+  } = useMutationRegistereUser() || {};
 
   // Form submission handler
   const onSubmit = async (values: Type_register) => {
     try {
-      await mutateAsync(values);
+      await mutateRegister(values);
 
       if (isSuccess) navigate("/signin");
     } catch {
@@ -57,91 +60,82 @@ export const RegisterForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-        <h1 className="bold text-2xl">Sign up 🍔</h1>
-        <div>
-          <Label value="Your username" />
-          <Controller
-            name="username"
-            control={control}
-            render={({ field: { ...field } }) => (
-              <TextInput
-                {...field}
-                placeholder="Jane doe"
-                type="text"
-                helperText={errors.username?.message}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <Label value="Your email" />
-          <Controller
-            name="email"
-            control={control}
-            render={({ field: { ...field } }) => (
-              <TextInput
-                {...field}
-                placeholder="jane@doe.com"
-                type="email"
-                helperText={errors.email?.message}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <Label value="Your password" />
-          <Controller
-            name="password"
-            control={control}
-            render={({ field: { ...field } }) => (
-              <TextInput
-                {...field}
-                type="password"
-                helperText={errors.password?.message}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <Label value="Confirm your password" />
-
-          <Controller
-            name="confirmPassword"
-            control={control}
-            render={({ field: { ...field } }) => (
-              <TextInput
-                {...field}
-                type="password"
-                helperText={errors.confirmPassword?.message}
-              />
-            )}
-          />
-        </div>
-        <div className="input-wrapper">
-          <Button
-            gradientDuoTone="purpleToPink"
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <Spinner size="sm" />
-                <span className="pl-3">Loading...</span>
-              </>
-            ) : (
-              "Sign Up"
-            )}
-          </Button>
-        </div>
-      </form>
-      <div className="flex gap-2 text-sm mt-5">
-        <span>Have an account?</span>
-        <Link to="/signin" className="text-blue-500">
-          Sign In
-        </Link>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <div>
+        <Label value="Your username" />
+        <Controller
+          name="username"
+          control={control}
+          render={({ field: { ...field } }) => (
+            <TextInput
+              {...field}
+              placeholder="Jane doe"
+              type="text"
+              helperText={errors.username?.message}
+            />
+          )}
+        />
       </div>
-    </>
+      <div>
+        <Label value="Your email" />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field: { ...field } }) => (
+            <TextInput
+              {...field}
+              placeholder="jane@doe.com"
+              type="email"
+              helperText={errors.email?.message}
+            />
+          )}
+        />
+      </div>
+      <div>
+        <Label value="Your password" />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field: { ...field } }) => (
+            <TextInput
+              {...field}
+              type="password"
+              helperText={errors.password?.message}
+            />
+          )}
+        />
+      </div>
+      <div>
+        <Label value="Confirm your password" />
+
+        <Controller
+          name="confirmPassword"
+          control={control}
+          render={({ field: { ...field } }) => (
+            <TextInput
+              {...field}
+              type="password"
+              helperText={errors.confirmPassword?.message}
+            />
+          )}
+        />
+      </div>
+      <div className="input-wrapper">
+        <Button
+          gradientDuoTone="purpleToPink"
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Spinner size="sm" />
+              <span className="pl-3">Loading...</span>
+            </>
+          ) : (
+            "Sign Up"
+          )}
+        </Button>
+      </div>
+    </form>
   );
 };
