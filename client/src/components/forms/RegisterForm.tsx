@@ -33,18 +33,26 @@ export const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Type_register>({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
     resolver: yupResolver<Type_register>(Schema_register),
   });
 
-  const { mutateAsync, isLoading } = useMutationRegistereUser() || {};
+  const { mutateAsync, isLoading, isSuccess } =
+    useMutationRegistereUser() || {};
 
   // Form submission handler
   const onSubmit = async (values: Type_register) => {
     try {
       await mutateAsync(values);
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
+
+      if (isSuccess) navigate("/signin");
+    } catch {
+      throw new Error("Something went wrong during registration");
     }
   };
 
