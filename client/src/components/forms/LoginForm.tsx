@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Type_login } from "../../api/auth/types";
 import { useMutationLogin } from "../../api/auth";
@@ -14,7 +13,6 @@ const Schema_login = Yup.object().shape({
 });
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -27,18 +25,12 @@ export const LoginForm = () => {
     resolver: yupResolver<Type_login>(Schema_login),
   });
 
-  const {
-    mutateAsync: mutateLogin,
-    isLoading,
-    isSuccess,
-  } = useMutationLogin() || {};
+  const { mutateAsync: mutateLogin, isLoading } = useMutationLogin() || {};
 
   // Form submission handler
   const onSubmit = async (values: Type_login) => {
     try {
       await mutateLogin(values);
-
-      if (isSuccess) navigate("/dashboard");
     } catch {
       throw new Error("Something went wrong during login");
     }
