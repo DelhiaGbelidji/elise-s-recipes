@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { Type_login } from "../../api/auth/types";
 import { useMutationLogin } from "../../api/auth";
+import { OAuth } from "../oauth/OAuth";
 
 const Schema_login = Yup.object().shape({
   email: Yup.string()
@@ -91,6 +92,7 @@ export const LoginForm = () => {
           )}
         </Button>
       </div>
+      <OAuth />
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
     </form>
   );
