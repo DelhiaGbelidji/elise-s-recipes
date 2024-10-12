@@ -2,6 +2,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import { Controller, useForm } from "react-hook-form";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import { Type_login } from "../../api/auth/types";
 import { useMutationLogin } from "../../api/auth";
 
@@ -13,6 +16,10 @@ const Schema_login = Yup.object().shape({
 });
 
 export const LoginForm = () => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -31,8 +38,9 @@ export const LoginForm = () => {
   const onSubmit = async (values: Type_login) => {
     try {
       await mutateLogin(values);
+      navigate("/dashboard");
     } catch {
-      throw new Error("Something went wrong during login");
+      setErrorMessage("Login failed, please check your credentials");
     }
   };
 
@@ -83,6 +91,7 @@ export const LoginForm = () => {
           )}
         </Button>
       </div>
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
     </form>
   );
 };

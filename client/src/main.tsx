@@ -4,14 +4,17 @@ import App from "./App.tsx";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "react-hot-toast";
+import { UserProvider } from "./contexts/UserContext.tsx";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Toaster position="bottom-left" />
-      <App />
+      <UserProvider>
+        <Toaster position="bottom-left" />
+        <App />
+      </UserProvider>
     </QueryClientProvider>
   </StrictMode>
 );

@@ -29,7 +29,7 @@ export const SignUp = () => {
           <RegisterForm />
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Already have an account?
+              Already have an account?{" "}
               <Link
                 to="/signin"
                 className="font-medium text-pink-600 hover:text-pink-500"

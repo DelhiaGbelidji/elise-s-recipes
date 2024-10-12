@@ -11,6 +11,12 @@ export type Type_login = {
   password: string;
 };
 
+export type Type_user = {
+  id: string;
+  email: string;
+  username: string;
+};
+
 //API
 export type Type_api_register = {
   username: string;
@@ -19,3 +25,12 @@ export type Type_api_register = {
 };
 
 export type Type_api_login = Type_login;
+
+export type Type_api_user = {
+  id: string;
+  email: string;
+  username: string;
+  createdAt: string;
+  updatedAt: string;
+  token: string;
+};
