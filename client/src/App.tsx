@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { About, Dashboard, Home, Recipes, SignIn, SignUp } from "./pages";
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/recipes" element={<Recipes />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
