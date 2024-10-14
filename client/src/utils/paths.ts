@@ -8,5 +8,6 @@ export const api = axios.create({
 export enum Auth {
   REGISTER = "auth/register",
   LOGIN = "auth/login",
+  GOOGLE = "auth/google",
   ME = "auth/me",
 }

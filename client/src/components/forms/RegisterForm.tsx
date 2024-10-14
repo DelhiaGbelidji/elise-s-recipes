@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Type_register } from "../../api/auth/types";
 import { useMutationRegistereUser } from "../../api/auth";
+import { OAuth } from "../oauth/OAuth";
 
 const Schema_register = Yup.object().shape({
   username: Yup.string()
@@ -18,7 +19,7 @@ const Schema_register = Yup.object().shape({
   password: Yup.string()
     .required("Please enter your password")
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       "Must contain 8 characters, one uppercase, one lowercase, one number, and one special character"
     ),
   confirmPassword: Yup.string()
@@ -42,18 +43,14 @@ export const RegisterForm = () => {
     resolver: yupResolver<Type_register>(Schema_register),
   });
 
-  const {
-    mutateAsync: mutateRegister,
-    isLoading,
-    isSuccess,
-  } = useMutationRegistereUser() || {};
+  const { mutateAsync: mutateRegister, isLoading } =
+    useMutationRegistereUser() || {};
 
   // Form submission handler
   const onSubmit = async (values: Type_register) => {
     try {
       await mutateRegister(values);
-
-      if (isSuccess) navigate("/signin");
+      navigate("/signin");
     } catch {
       throw new Error("Something went wrong during registration");
     }
@@ -136,6 +133,7 @@ export const RegisterForm = () => {
           )}
         </Button>
       </div>
+      <OAuth />
     </form>
   );
 };
