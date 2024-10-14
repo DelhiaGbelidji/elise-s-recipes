@@ -1,4 +1,4 @@
-import { Type_api_login, Type_api_register } from "./types";
+import { Type_api_google, Type_api_login, Type_api_register } from "./types";
 import { api, Auth } from "../../utils/paths";
 
 export const registerUser = async (data: Type_api_register) => {
@@ -8,6 +8,11 @@ export const registerUser = async (data: Type_api_register) => {
 
 export const login = async (credentials: Type_api_login) => {
   const response = await api.post(Auth.LOGIN, credentials);
+  return response.data;
+};
+
+export const google = async (data: Type_api_google) => {
+  const response = await api.post(Auth.GOOGLE, data);
   return response.data;
 };
 

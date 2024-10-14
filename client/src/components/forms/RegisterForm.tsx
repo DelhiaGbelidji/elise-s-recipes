@@ -43,18 +43,14 @@ export const RegisterForm = () => {
     resolver: yupResolver<Type_register>(Schema_register),
   });
 
-  const {
-    mutateAsync: mutateRegister,
-    isLoading,
-    isSuccess,
-  } = useMutationRegistereUser() || {};
+  const { mutateAsync: mutateRegister, isLoading } =
+    useMutationRegistereUser() || {};
 
   // Form submission handler
   const onSubmit = async (values: Type_register) => {
     try {
       await mutateRegister(values);
-
-      if (isSuccess) navigate("/signin");
+      navigate("/signin");
     } catch {
       throw new Error("Something went wrong during registration");
     }

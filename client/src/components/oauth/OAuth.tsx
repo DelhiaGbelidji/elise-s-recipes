@@ -2,9 +2,14 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "flowbite-react";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { app } from "../../firebase";
+import { useMutationGoogle } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 export const OAuth = () => {
   const auth = getAuth(app);
+  const navigate = useNavigate();
+
+  const { mutateAsync: mutateGoogle } = useMutationGoogle() || {};
 
   const handleClick = async () => {
     const provider = new GoogleAuthProvider();
@@ -12,9 +17,18 @@ export const OAuth = () => {
 
     try {
       const googleResults = await signInWithPopup(auth, provider);
-      console.log(googleResults);
+
+      // Mutation to save user data
+      await mutateGoogle({
+        name: googleResults.user.displayName!,
+        email: googleResults.user.email!,
+        googlePhotoUrl: googleResults.user.photoURL!,
+      });
+
+      // After successful mutation, navigate
+      navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      console.error("Error during Google OAuth:", error);
     }
   };
 
