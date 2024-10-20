@@ -8,6 +8,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { UserProvider } from "./contexts/UserContext.tsx";
 import { store } from "./utils/store.ts";
+import { ThemeProvider } from "./components/theme/ThemeProvider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <Toaster position="bottom-left" />
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </UserProvider>
       </QueryClientProvider>
     </Provider>

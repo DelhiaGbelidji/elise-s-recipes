@@ -2,12 +2,15 @@ import { Button, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { WiMoonAltThirdQuarter } from "react-icons/wi";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { useUser } from "../../hooks/useUser";
 import { UserDropDown } from "..";
+import { toggleTheme } from "../../utils/theme/themeSlice";
 
 export const Header = () => {
   const path = useLocation().pathname;
+  const dispatch = useDispatch();
   const { user } = useUser();
 
   // Fonction pour rendre les liens du menu de manière dynamique
@@ -40,6 +43,7 @@ export const Header = () => {
       <Button
         className="lg:hidden"
         outline
+        pill
         gradientDuoTone="pinkToOrange"
         aria-label="Search"
       >
@@ -47,9 +51,10 @@ export const Header = () => {
       </Button>
       <div className="flex gap-2 md:order-2">
         <Button
-          color="gray"
-          className="hidden sm:inline"
-          aria-label="Toggle dark mode"
+          className="sm:inline p-0"
+          pill
+          gradientDuoTone="pinkToOrange"
+          onClick={() => dispatch(toggleTheme())}
         >
           <WiMoonAltThirdQuarter />
         </Button>
