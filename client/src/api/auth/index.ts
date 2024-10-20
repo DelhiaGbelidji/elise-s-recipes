@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import toast from "react-hot-toast";
 
 import {
@@ -37,8 +37,6 @@ export const useMutationRegistereUser = () => {
 };
 
 export const useMutationLogin = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: (credentials: Type_login) => {
       return login(formatLoginData(credentials));
@@ -47,7 +45,6 @@ export const useMutationLogin = () => {
       const { token } = data;
 
       localStorage.setItem("access_token", token);
-      await queryClient.invalidateQueries(["me"]);
     },
   });
 };
