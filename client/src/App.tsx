@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { About, Dashboard, Home, Recipes, SignIn, SignUp } from "./pages";
 import { Footer, Header } from "./components";
-import { PrivateRoute } from "./router/PrivateRoute";
+import { PrivateRoute } from "./components/router/PrivateRoute";
 
 function App() {
   return (

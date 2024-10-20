@@ -1,5 +1,6 @@
 export { Header } from "./header/Header";
 export { Footer } from "./footer/Footer";
+export { Sidebar } from "./sidebar/Sidebar";
 
 //Dropdowns
 export { UserDropDown } from "./dropdowns/UserDropDown";
