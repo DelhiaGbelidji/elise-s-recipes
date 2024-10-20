@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Type_register } from "../../api/auth/types";
 import { useMutationRegistereUser } from "../../api/auth";
-import { OAuth } from "../oauth/OAuth";
+import { OAuth } from "..";
 
 const Schema_register = Yup.object().shape({
   username: Yup.string()

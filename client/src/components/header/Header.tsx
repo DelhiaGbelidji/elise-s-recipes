@@ -1,11 +1,9 @@
-import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
+import { Button, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { WiMoonAltThirdQuarter } from "react-icons/wi";
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
-import { HiViewGrid } from "react-icons/hi";
-import { FaUser } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
+import { UserDropDown } from "..";
 
 export const Header = () => {
   const path = useLocation().pathname;
@@ -56,26 +54,7 @@ export const Header = () => {
         </Button>
         <>
           {user ? (
-            <Dropdown
-              arrowIcon={false}
-              inline
-              label={<Avatar alt="user" img={user.profilePicture} rounded />}
-            >
-              <Dropdown.Header>
-                <span className="block text-sm">@{user.username}</span>
-                <span className="block text-sm font-medium truncate">
-                  {user.email}
-                </span>
-              </Dropdown.Header>
-              <Link to={"/dashboard"}>
-                <Dropdown.Item icon={HiViewGrid}>Dashboard</Dropdown.Item>
-              </Link>
-              <Link to={"/dashboard?tab=profile"}>
-                <Dropdown.Item icon={FaUser}>Profile</Dropdown.Item>
-              </Link>
-              <Dropdown.Divider />
-              <Dropdown.Item icon={FiLogOut}>Logout</Dropdown.Item>
-            </Dropdown>
+            <UserDropDown user={user} />
           ) : (
             <Link to="/signin" aria-label="Sign in">
               <Button gradientDuoTone="pinkToOrange" pill>
