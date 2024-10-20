@@ -13,7 +13,7 @@ export const formatCurrentUserData = (data: Type_api_user): Type_user => {
   return {
     id: data.id,
     username: data.username,
-    email: data.username,
+    email: data.email,
     profilePicture: data.profilePicture,
   };
 };

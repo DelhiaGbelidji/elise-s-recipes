@@ -2,9 +2,12 @@ import { Button, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { WiMoonAltThirdQuarter } from "react-icons/wi";
 import { Link, useLocation } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
+import { UserDropDown } from "..";
 
 export const Header = () => {
   const path = useLocation().pathname;
+  const { user } = useUser();
 
   // Fonction pour rendre les liens du menu de manière dynamique
   const renderNavLink = (to: string, label: string) => (
@@ -49,11 +52,17 @@ export const Header = () => {
         >
           <WiMoonAltThirdQuarter />
         </Button>
-        <Link to="/signin" aria-label="Sign in">
-          <Button gradientDuoTone="pinkToOrange" pill>
-            Sign in
-          </Button>
-        </Link>
+        <>
+          {user ? (
+            <UserDropDown user={user} />
+          ) : (
+            <Link to="/signin" aria-label="Sign in">
+              <Button gradientDuoTone="pinkToOrange" pill>
+                Sign in
+              </Button>
+            </Link>
+          )}
+        </>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>

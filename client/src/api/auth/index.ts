@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   formatCurrentUserData,
   formatGoogleData,
@@ -36,13 +36,17 @@ export const useMutationRegistereUser = () => {
 };
 
 export const useMutationLogin = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (credentials: Type_login) => {
       return login(formatLoginData(credentials));
     },
-    onSuccess: (data: Type_api_user) => {
+    onSuccess: async (data: Type_api_user) => {
       const { token } = data;
+
       localStorage.setItem("access_token", token);
+      await queryClient.invalidateQueries(["me"]);
     },
   });
 };

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 import { Type_login } from "../../api/auth/types";
 import { useMutationLogin } from "../../api/auth";
-import { OAuth } from "../oauth/OAuth";
+import { OAuth } from "..";
 
 const Schema_login = Yup.object().shape({
   email: Yup.string()
