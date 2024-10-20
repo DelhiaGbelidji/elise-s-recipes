@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { About, Dashboard, Home, Recipes, SignIn, SignUp } from "./pages";
 import { Footer, Header } from "./components";
 

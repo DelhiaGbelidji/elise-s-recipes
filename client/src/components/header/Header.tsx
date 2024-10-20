@@ -2,6 +2,7 @@ import { Button, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { WiMoonAltThirdQuarter } from "react-icons/wi";
 import { Link, useLocation } from "react-router-dom";
+
 import { useUser } from "../../hooks/useUser";
 import { UserDropDown } from "..";
 

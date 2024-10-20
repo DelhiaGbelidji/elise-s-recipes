@@ -1,4 +1,4 @@
-import { Dropdown, Avatar } from "flowbite-react";
+import { Avatar, Dropdown } from "flowbite-react";
 import { FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { HiViewGrid } from "react-icons/hi";

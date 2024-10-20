@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext"; // Assure-toi que le chemin est correct
+
+import { UserContext } from "../contexts/UserContext";
 
 export const useUser = () => {
   const context = useContext(UserContext);

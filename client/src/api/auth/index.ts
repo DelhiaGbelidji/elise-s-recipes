@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import toast from "react-hot-toast";
+
 import {
   formatCurrentUserData,
   formatGoogleData,
@@ -8,7 +10,6 @@ import {
 } from "./formatters";
 import { getCurrentUser, google, login, registerUser } from "./services";
 import { Type_api_user, Type_google, Type_login, Type_register } from "./types";
-import toast from "react-hot-toast";
 
 export const useGetCurrentUser = () => {
   return useQuery({

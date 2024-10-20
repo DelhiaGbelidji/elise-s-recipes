@@ -1,9 +1,10 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button } from "flowbite-react";
 import { AiFillGoogleCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+
 import { app } from "../../firebase";
 import { useMutationGoogle } from "../../api/auth";
-import { useNavigate } from "react-router-dom";
 
 export const OAuth = () => {
   const auth = getAuth(app);
